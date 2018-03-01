@@ -10,13 +10,13 @@ router.get('/', function (req, res) {
 router.get('/users/:name', function(req, res) {
   var name = req.params.name;
   var list = tweetBank.find( {name: name} );
-  res.render( 'index', { tweets: list} );
+  res.render( 'index', { tweets: list, showForm: true, name: name } );
 });
 
 router.get('/tweets/:id', function(req, res) {
   var id = +req.params.id;
   var tweet = tweetBank.find( {id: id} );
-  res.render( 'index', { tweets: tweet, showForm: true } );
+  res.render( 'index', { tweets: tweet } );
 });
 
 router.post('/tweets', function(req, res) {
