@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const nunjucks = require('nunjucks');
 const routes = require('./routes');
 const bodyParser = require('body-parser')
+const socketio = require('socket.io');
 
 app.set('view engine', 'html'); // have res.render work with html files
 app.engine('html', nunjucks.render); // when giving html files to res.render, tell it to use nunjucks
@@ -17,8 +18,9 @@ app.use(bodyParser.json())
 
 app.use(express.static('public'));
 
-app.use('/', routes);
+var server = app.listen(3000);
+var io = socketio.listen(server);
 
-app.listen(3000, () => {
-  console.log('Server is listening on port 3000');
-});
+app.use('/', routes(io));
+
+
