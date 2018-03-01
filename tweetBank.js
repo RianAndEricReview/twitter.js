@@ -1,9 +1,10 @@
 const _ = require('lodash');
 
 const data = [];
+let id = 0;
 
 function add (name, content) {
-  data.push({ name: name, content: content });
+  data.push({ name: name, content: content, id: id });
 }
 
 function list () {
@@ -36,6 +37,7 @@ const getFakeTweet = function() {
 };
 
 for (let i = 0; i < 10; i++) {
+  id++;
   module.exports.add( getFakeName(), getFakeTweet() );
 }
 
